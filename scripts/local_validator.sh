@@ -1,0 +1,1 @@
+python llm_defender/neurons/validator.py --netuid 1 --wallet.name validator --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9946 --logging.debug

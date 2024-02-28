@@ -1,0 +1,1 @@
+python llm_defender/neurons/miner.py --netuid 1 --wallet.name miner --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9946 --axon.port 15000 --miner_set_weights True --validator_min_stake 0

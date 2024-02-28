@@ -19,6 +19,7 @@ from llm_defender.core.miners.engines.prompt_injection.yara import YaraEngine
 from llm_defender.core.miners.engines.prompt_injection.text_classification import TextClassificationEngine
 from llm_defender.core.miners.engines.prompt_injection.vector_search import VectorEngine
 from llm_defender.base.utils import validate_miner_blacklist
+from llm_defender.xfair.history import xfair_history
 
 class PromptInjectionMiner(BaseNeuron):
     """PromptInjectionMiner class for LLM Defender Subnet
@@ -368,6 +369,8 @@ class PromptInjectionMiner(BaseNeuron):
         bt.logging.debug(f'Engine data: {output["engines"]}')
         bt.logging.success(f'Processed synapse from UID: {self.metagraph.hotkeys.index(synapse.dendrite.hotkey)} - Confidence: {output["confidence"]} - UUID: {output["synapse_uuid"]}')
 
+        xfair_history.log(synapse)
+        
         return synapse
     
     def calculate_overall_confidence(self, confidences, weights):
