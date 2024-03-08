@@ -6,7 +6,7 @@ import json
 from string import Template
 
 HISTORY_TEMPLATE = Template(
-    'XFAIR_HISTORY"$timestamp","$uuid","$subnet_version","$prompt","$validator_hotkey","$validator_ip","$xfair_model_version","$confidence","$output_json"')
+    'XFAIR_HISTORY"$timestamp_start","$timestamp_end","$uuid","$subnet_version","$prompt","$validator_hotkey","$validator_ip","$xfair_model_version","$confidence","$output_json"')
 
 
 class HistoryLogger:
@@ -19,7 +19,8 @@ class HistoryLogger:
     def log(self, synapse: LLMDefenderProtocol):
         if self.mode == "Log":
             log_message = HISTORY_TEMPLATE.substitute(
-                timestamp=time.time(),
+                timestamp_start=synapse.synapse_timestamp,
+                timestamp_end=time.time(),
                 uuid=synapse.synapse_uuid,
                 subnet_version=synapse.subnet_version,
                 prompt=synapse.prompt.replace("\"", "\"\""),
